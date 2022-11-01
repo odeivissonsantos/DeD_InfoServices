@@ -3,7 +3,106 @@
     Layout = "_LayoutDefault";
 }
 
+@*<link rel="stylesheet" href="~/css/login.css" />*@
 
-<h1>
-    LOGIN
-</h1>
+
+<section class="row">
+
+    <div class="col-sm-4">
+        <form method="post" enctype="multipart/form-data">
+            <p>LOGIN</p>
+
+            <div>
+                <div id="errorModal" style="display: none">
+                    <div id="msgError" class="alert alert-danger">
+                        <i class="fa fa-ban"></i>
+                        <button class="close" onclick="fechar_alerta();" aria-hidden="true" type="button">×</button>
+
+                        <span id="erroMsg"></span>
+                    </div>
+                </div>
+                <div id="sucessModal" style="display: none">
+                    <div id="msgSucess" class="alert alert-success">
+                        <i class="fa fa-ban"></i>
+                        <button class="close" onclick="fechar_alerta();" aria-hidden="true" type="button">×</button>
+
+                        <span id="sucessMsg"></span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-outline mb-4">
+                <label class="form-label" for="email">Email</label>
+                <input type="email" id="email" value="" class="form-control"
+                       placeholder="EX: login@email.com.br" required />
+            </div>
+
+            <div class="form-outline mb-4">
+                <label class="form-label" for="senha">Senha</label>
+                <input type="password" id="senha" value="" class="form-control" required />
+            </div>
+
+            <div class="text-center pt-1 mb-5 pb-1">
+                <button class="btn btn-primary btn-block fa-lg gradient-custom-2 mb-3" onclick="Logar();">
+                    Login
+                </button>
+                <a class="text-muted" href="#!">Esqueceu a senha?</a>
+            </div>
+        </form>
+    </div>
+
+    <div class="col-sm-8">
+        <h1>
+            IMAGEM
+        </h1>
+    </div>
+</section>
+
+<script>
+
+    function Logar() {
+        let email = $('#email').val();
+        let senha = $('#senha').val();
+        $('#msgError #erroMsg').html();
+        $('#item_form #msgError').hide();
+        $.ajax({
+            type: 'POST',
+            data: {
+                'email': email,
+                'senha': senha,
+            },
+            url: '@Url.Action("Logar", "Login")',
+            success: function (result) {
+                alert(senha);
+                if (result.is_action) {                
+                    $('.overlay').hide();
+                    $('#errorModal').hide();
+                    $('#msgSucess #sucessMsg').html('Login efetuado com sucesso!!!');
+                    $('#sucessModal').show();
+                    $('#email').val('');
+                    $('#senha').val('');
+                    window.location.href = '@Url.Action("Index", "Home")';
+                }
+                else
+                {
+                    $('#msgError #erroMsg').html(result.error);
+                    $('#errorModal').show();
+                    $('#sucessModal').hide();
+                }
+            },
+            error: function (error) {
+                $('#msgError #erroMsg').html(result.error);
+                $('#errorModal').show();
+            },
+            datatype: 'json'
+        });
+    }
+
+    function fechar_alerta() {
+        $('#errorModal').hide();
+        $('#sucessModal').hide();
+    }
+
+
+</script>
+    
