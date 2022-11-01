@@ -73,7 +73,6 @@
             },
             url: '@Url.Action("Logar", "Login")',
             success: function (result) {
-                alert(senha);
                 if (result.is_action) {                
                     $('.overlay').hide();
                     $('#errorModal').hide();

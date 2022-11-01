@@ -1,8 +1,18 @@
 ﻿@{
-    ViewData["Title"] = "Home Page";
+    ViewData["Title"] = "Dashboard";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
+
+<section class="container">
+    <div class="text-center">
+        <div class="card text-white bg-info mb-3 mt-4" style="max-width: 18rem; color: currentColor; ">
+            <a href='@Url.Action("Index", "Home")'>
+                <div class="card-body" style="color:white;">
+                    <h5 class="card-title">Produtos</h5>
+                    <p class="card-text">Produtos</p>
+                </div>
+            </a>
+        </div>
+    </div>
+</section>
+   
