@@ -2,6 +2,183 @@
     ViewData["Title"] = "Lista de Usuários";
 }
 
-<section>
-    Hellow
+<section class="container">
+    <h1>
+        Usuários
+    </h1>
 </section>
+<!-- Main content -->
+<section class="container">
+    <div class="row">
+        <div class="col-x-12">
+            <div class="box">
+                <div class="box-header">
+                    <h3 class="box-title">Lista</h3>
+                </div><!-- /.box-header -->
+                <div class="box-body">
+
+                    <div id="list_header">
+                        <div id="msgError" class="alert alert-danger alert-dismissable" style="display: none;">
+                            <i class="fa fa-ban"></i>
+                            <button class="close" aria-hidden="true" data-dismiss="alert" type="button">×</button>
+                            <b>Erro</b>
+                            <span id="erroMsg"></span>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="form-group col-xs-2">
+                            <label>Email:</label>
+                            <input type="text" placeholder="EX: email@email.com" id="pesquisaEmail" name="pesquisaEmail" class="form-control input-value">
+                        </div>
+                        <div class="form-group col-xs-2">
+                            <label>Nome:</label>
+                            <input type="text" placeholder="EX: Maria" id="pesquisaNome" name="pesquisaNome" class="form-control input-value">
+                        </div>
+                        <div class="form-group col-xs-2" style="margin-top: 25px;">
+                            <button type="button" id="btnExameListar" onclick="listar();" class="btn btn-primary">Listar</button>
+                            <a href="@Url.Action("ExameCadastro", "SGPE")" class="btn btn-success" style="margin-left: 5px; color:white;">Novo</a>
+                        </div>
+                    </div>
+
+                    <table id="list_items" class="table table-bordered table-striped">
+                        <thead>
+                            <tr>
+                                <th>Id</th>
+                                <th>Nome</th>
+                                <th>Email</th>
+                                <th>Data Cadastro</th>
+                                <th>Perfil</th>
+                                <th></th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                        <tfoot>
+                            <tr>
+                                <th>Id</th>
+                                <th>Nome</th>
+                                <th>Email</th>
+                                <th>Data Cadastro</th>
+                                <th>Perfil</th>
+                                <th></th>
+                                <th></th>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div><!-- /.box-body -->
+            </div><!-- /.box -->
+        </div>
+    </div>
+</section><!-- /.content -->
+
+<div id="modalExclusao">
+    <div class="modal fade" id="modal-exclusao" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Confirmação</h4>
+
+                </div>
+                <div class="modal-body" style="padding-bottom: 0px; text-align: center; font-size: 18px;">
+                    <div class="row">
+                        Tem certeza que deseja excluir o exame?
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <textarea style="min-height: 150px; margin-top: 15px;" maxlength="500" placeholder="Digite uma justificativa"
+                                      id="txtJustificativa" name="justificativa" class="form-control"></textarea>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button id="btn-confirmar-excluir" class="btn btn-danger pull-right">Excluir</button>
+                    <button type="button" class="btn btn-secondary pull-left" data-dismiss="modal">Não</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        //$('#btn-confirmar-excluir').on('click', excluir);
+
+        //$('#pesquisaCodigo').on('keypress', maskPesquisaCodigo);
+        //function maskPesquisaCodigo(evt) {
+        //    evt = (evt) ? evt : window.event;
+        //    var charCode = (evt.which) ? evt.which : evt.keyCode;
+        //    if ((charCode > 31 && charCode < 48) || charCode > 57) {
+        //        return false;
+        //    }
+        //    return true;
+        //}
+
+        listar();
+    });
+
+    function listar() {
+        $('#list_items').dataTable({
+            'bPaginate': true,
+            'bJQueryUI': true,
+            'bProcessing': true,
+            'bServerSide': true,
+            'bDestroy': true,
+            'sAjaxSource': `@Url.Action("UsuarioPagination", "Usuario")?nome=${$('#pesquisaNome').val()}&email=${$('#pesquisaEmail').val()}`,
+            'sServerMethod': 'POST',
+            'aoColumns': [
+                { 'mData': 'ide_usuario' },
+                { 'mData': 'nome' },
+                { 'mData': 'email' },
+                { 'mData': 'dtc_cadastro' },
+                { 'mData': 'perfil' },
+                { 'mData': 'editar' },
+                { 'mData': 'excluir' }
+            ]
+        });
+    }
+
+    @*function modalExcluir(ide_exame, justificativa) {
+        $('#txtJustificativa').val('');
+        $('#modal-exclusao').modal('show');
+        $('#btn-confirmar-excluir').attr('id-target', ide_exame);
+    }
+
+    function excluir() {
+        let ide_exame = $('#btn-confirmar-excluir').attr('id-target');
+        let justificativa = $('#txtJustificativa').val();
+
+        if (!justificativa) {
+            swal("Ops!", "Justificativa é obrigatória!", "error");
+            return;
+        } else if (justificativa.length < 5) {
+            swal("Ops!", "Justificativa deve ter, no mínimo, 5 caracteres!", "error");
+            return;
+        }
+
+        $.ajax({
+            type: 'POST',
+            data: {
+                'ide_exame': ide_exame,
+                'justificativa': justificativa
+            },
+            url: '@Url.Action("ExcluirExame", "SGPE")',
+            success: function (result) {
+                if (result.is_action) {
+                    swal("Sucesso!", "Exame excluído com sucesso!", "success");
+                    listar();
+                    $('#modal-exclusao').modal('hide');
+                }
+                else {
+                    swal("Ops!", result.error, "error");
+                }
+            },
+            error: function (error)
+            {
+                swal("Ops!", "Ocorreu um erro: " + error, "error");
+            },
+            datatype: 'json'
+        });
+    }*@
+</script>
+

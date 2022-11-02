@@ -32,10 +32,5 @@ namespace DeD_InfoServices.Models
 
         [Column("sts_excluido")]
         public bool Sts_Excluido { get; set; }
-
-        [Column("ide_login")]
-        public LoginModel Ide_login { get; set; }
-
-
     }
 }
