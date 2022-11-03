@@ -1,4 +1,5 @@
-﻿@{
+﻿@model DeD_InfoServices.DTOs.UsuarioDTO
+@{
     ViewData["Title"] = "Lista de Usuários";
 }
 
@@ -9,7 +10,6 @@
 </section>
 <!-- Main content -->
 <section class="container">
-    <div class="row">
         <div class="col-x-12">
             <div class="box">
                 <div class="box-header">
@@ -26,7 +26,7 @@
                         </div>
                     </div>
 
-                    <div class="row">
+                    <div>
                         <div class="form-group col-xs-2">
                             <label>Email:</label>
                             <input type="text" placeholder="EX: email@email.com" id="pesquisaEmail" name="pesquisaEmail" class="form-control input-value">
@@ -36,8 +36,8 @@
                             <input type="text" placeholder="EX: Maria" id="pesquisaNome" name="pesquisaNome" class="form-control input-value">
                         </div>
                         <div class="form-group col-xs-2" style="margin-top: 25px;">
-                            <button type="button" id="btnExameListar" onclick="listar();" class="btn btn-primary">Listar</button>
-                            <a href="@Url.Action("ExameCadastro", "SGPE")" class="btn btn-success" style="margin-left: 5px; color:white;">Novo</a>
+                            <button type="button" id="btnExameListar" onclick="listar();" class="btn btn-primary">Pesquisar</button>
+                            <a href="@Url.Action("Index", "Home")" class="btn btn-success" style="margin-left: 5px; color:white;">Novo</a>
                         </div>
                     </div>
 
@@ -47,10 +47,11 @@
                                 <th>Id</th>
                                 <th>Nome</th>
                                 <th>Email</th>
+                                <th>Celular</th>
                                 <th>Data Cadastro</th>
                                 <th>Perfil</th>
-                                @*<th></th>
-                                <th></th>*@
+                                <th></th>
+                                <th></th>
                             </tr>
                         </thead>
                         <tbody></tbody>
@@ -59,17 +60,17 @@
                                 <th>Id</th>
                                 <th>Nome</th>
                                 <th>Email</th>
+                                <th>Celular</th>
                                 <th>Data Cadastro</th>
                                 <th>Perfil</th>
-                                @*<th></th>
-                                <th></th>*@
+                                <th></th>
+                                <th></th>
                             </tr>
                         </tfoot>
                     </table>
                 </div><!-- /.box-body -->
             </div><!-- /.box -->
         </div>
-    </div>
 </section><!-- /.content -->
 
 <div id="modalExclusao">
@@ -123,6 +124,7 @@
             'bJQueryUI': true,
             'bProcessing': true,
             'bServerSide': true,
+            "searching": true,
             'bDestroy': true,
             'sAjaxSource': `@Url.Action("UsuarioPagination", "Usuario")?nome=${$('#pesquisaNome').val()}&email=${$('#pesquisaEmail').val()}`,
             'sServerMethod': 'POST',
@@ -130,10 +132,11 @@
                 { 'mData': 'ide_usuario' },
                 { 'mData': 'nome' },
                 { 'mData': 'email' },
+                { 'mData': 'celular' },
                 { 'mData': 'dtc_cadastro' },
-                { 'mData': 'perfil' }
-                //{ 'mData': 'editar' },
-                //{ 'mData': 'excluir' }
+                { 'mData': 'perfil' },
+                { 'mData': 'editar' },
+                { 'mData': 'excluir' }
             ],
             "language": {
                 "url": "//cdn.datatables.net/plug-ins/1.12.1/i18n/pt-BR.json"

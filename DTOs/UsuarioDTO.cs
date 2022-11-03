@@ -13,6 +13,7 @@ namespace DeD_InfoServices.DTOs
         public string Nome { get; set; }
         public string Sobrenome { get; set; }
         public string Email { get; set; }
+        public string Celular { get; set; }
         public DateTime Dtc_Cadastro { get; set; }
         public PerfilEnum Perfil { get; set; }
         public bool Sts_Excluido { get; set; }
@@ -27,6 +28,7 @@ namespace DeD_InfoServices.DTOs
             Nome = item.Nome;
             Sobrenome = item.Sobrenome;
             Email = item.Email;
+            Celular = item.Celular;
             Dtc_Cadastro = item.Dtc_Cadastro;
             Perfil = item.Perfil;
             Sts_Excluido = item.Sts_Excluido;

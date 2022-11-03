@@ -22,5 +22,6 @@ namespace DeD_InfoServices
                 {
                     webBuilder.UseStartup<Startup>();
                 });
+        
     }
 }

@@ -33,8 +33,10 @@ namespace DeD_InfoServices.Controllers
             if (!string.IsNullOrEmpty(email)) query = query.Where(x => x.Email == email);
             if (!string.IsNullOrEmpty(nome)) query = query.Where(x => x.Nome == nome);
 
-            query = query.Where(x => x.Email.ToString().ToLower()
-                 .Contains(Utilities.RemoveSpecialCharacters(sSearch).ToLower())).AsQueryable();
+            if (!string.IsNullOrEmpty(sSearch)) query = query.Where(x => x.Nome.ToLower()
+                .Contains(Utilities.RemoveSpecialCharacters(sSearch).ToLower())).AsQueryable();
+
+           
 
             int recordsTotal = query.Count();
 
@@ -46,10 +48,11 @@ namespace DeD_InfoServices.Controllers
                 ide_usuario = x.Ide_Usuario,
                 nome = $"{x.Nome} {x.Sobrenome}",
                 email = x.Email,
-                dtc_cadastro = x.Dtc_Cadastro/*,*/
-                //perfil = x.Perfil,
-                //editar =  $"<a href='{Url.Action("ExameCadastro", "SGPE")}?ide_usuario={x.Ide_Usuario}'>Editar</a>",
-                //excluir = $"<a href='#' onclick='modalExcluir({x.Ide_Usuario})'>Excluir</a>",
+                celular = x.Celular,
+                dtc_cadastro = x.Dtc_Cadastro,
+                perfil = x.Perfil,
+                editar = $"<a href='{Url.Action("Index", "Home")}?ide_usuario={x.Ide_Usuario}'>Editar</a>",
+                excluir = $"<a href='#' onclick='modalExcluir({x.Ide_Usuario})'>Excluir</a>",
             }).ToArray();
 
             return Json(new

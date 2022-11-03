@@ -33,6 +33,7 @@ namespace DeD_InfoServices.Services
         public void SalvarUsuario(UsuarioDTO usuarioDTO)
         {
             bool novo = false;
+            string error = "";
 
             //if (string.IsNullOrEmpty(exameDTO.Nome.Trim())) throw new Exception("Nome do exame é obrigatório!");
             //if (exameDTO.Nome.Length < 5) throw new Exception("Nome do exame deve ter no mínimo 5 caracteres!");
@@ -77,12 +78,14 @@ namespace DeD_InfoServices.Services
             catch (Exception e)
             {
                 _context.Dispose();
-                throw e;
+                 error = e.Message;
             }
         }
 
         public void ExcluirUsuario(long ide_usuario)
         {
+            string error = "";
+
             try
             {
                 UsuarioModel usuario = _context.Usuario.Where(x => x.Ide_Usuario == ide_usuario).FirstOrDefault();
@@ -95,7 +98,7 @@ namespace DeD_InfoServices.Services
             catch (Exception e)
             {
                 _context.Dispose();
-                throw e;
+                error = e.Message;
             }
         }
 

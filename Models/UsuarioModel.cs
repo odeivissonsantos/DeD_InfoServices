@@ -24,6 +24,9 @@ namespace DeD_InfoServices.Models
         [Column("email")]
         public string Email { get; set; }
 
+        [Column("celular")]
+        public string Celular { get; set; }
+
         [Column("dtc_cadastro")]
         public DateTime Dtc_Cadastro { get; set; }
 

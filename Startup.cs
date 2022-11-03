@@ -30,6 +30,7 @@ namespace DeD_InfoServices
             services.AddDbContext<DeDContext>(options =>
                 options.UseSqlite(Configuration.GetConnectionString
                 ("DeDInfoServicesConnectionString")));
+            services.AddScoped<UsuarioService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
