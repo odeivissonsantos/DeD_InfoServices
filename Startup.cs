@@ -1,4 +1,5 @@
 using DeD_InfoServices.Models;
+using DeD_InfoServices.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;

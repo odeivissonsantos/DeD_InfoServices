@@ -49,8 +49,8 @@
                                 <th>Email</th>
                                 <th>Data Cadastro</th>
                                 <th>Perfil</th>
-                                <th></th>
-                                <th></th>
+                                @*<th></th>
+                                <th></th>*@
                             </tr>
                         </thead>
                         <tbody></tbody>
@@ -61,8 +61,8 @@
                                 <th>Email</th>
                                 <th>Data Cadastro</th>
                                 <th>Perfil</th>
-                                <th></th>
-                                <th></th>
+                                @*<th></th>
+                                <th></th>*@
                             </tr>
                         </tfoot>
                     </table>
@@ -131,10 +131,13 @@
                 { 'mData': 'nome' },
                 { 'mData': 'email' },
                 { 'mData': 'dtc_cadastro' },
-                { 'mData': 'perfil' },
-                { 'mData': 'editar' },
-                { 'mData': 'excluir' }
-            ]
+                { 'mData': 'perfil' }
+                //{ 'mData': 'editar' },
+                //{ 'mData': 'excluir' }
+            ],
+            "language": {
+                "url": "//cdn.datatables.net/plug-ins/1.12.1/i18n/pt-BR.json"
+                }
         });
     }
 

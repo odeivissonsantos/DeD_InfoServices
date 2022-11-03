@@ -8,13 +8,15 @@ namespace DeD_InfoServices.Models
 {
     public class DeDContext : DbContext
     {
-        public DbSet<UsuarioModel> Usuario { get; set; }
-        public DbSet<LoginModel> Login { get; set; }
-
         public DeDContext(DbContextOptions<DeDContext> options)
             : base(options)
         {
 
         }
+
+        public DbSet<UsuarioModel> Usuario { get; set; }
+        public DbSet<LoginModel> Login { get; set; }
+
+
     }
 }
