@@ -27,6 +27,7 @@ namespace DeD_InfoServices
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
+            services.AddRazorPages();
             services.AddDbContext<DeDContext>(options =>
                 options.UseSqlite(Configuration.GetConnectionString
                 ("DeDInfoServicesConnectionString")));
