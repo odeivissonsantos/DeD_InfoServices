@@ -13,6 +13,7 @@ namespace DeD_InfoServices.DTOs
         public string Nome { get; set; }
         public string Sobrenome { get; set; }
         public string Email { get; set; }
+        public string Senha { get; set; }
         public string Celular { get; set; }
         public DateTime Dtc_Cadastro { get; set; }
         public PerfilEnum Perfil { get; set; }

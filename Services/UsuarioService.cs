@@ -45,6 +45,7 @@ namespace DeD_InfoServices.Services
             try
             {
                 UsuarioModel usuario = _context.Usuario.Where(x => x.Ide_Usuario == usuarioDTO.Ide_Usuario && x.Sts_Excluido == false).FirstOrDefault();
+                LoginModel usuarioLogin = new LoginModel();
 
                 if (usuario == null)
                 {
@@ -52,14 +53,17 @@ namespace DeD_InfoServices.Services
                         throw new Exception("Já existe um usuário com o mesmo email cadastrado!");
 
                     usuario = new UsuarioModel();
-                    usuario.Sts_Excluido = false;
 
+                    usuario.Sts_Excluido = false;
                     usuario.Nome = usuarioDTO.Nome;
                     usuario.Sobrenome = usuarioDTO.Sobrenome;
                     usuario.Email = usuarioDTO.Email;
                     usuario.Celular = usuarioDTO.Celular;
                     usuario.Perfil = usuarioDTO.Perfil;
                     usuario.Dtc_Cadastro = DateTime.Now;
+
+                    usuarioLogin.Email = usuarioDTO.Email;
+                    usuarioLogin.Senha = Guid.NewGuid().ToString().Substring(0, 8);
 
                     novo = true;
                 }
@@ -70,11 +74,14 @@ namespace DeD_InfoServices.Services
                     usuario.Email = usuarioDTO.Email;
                     usuario.Celular = usuarioDTO.Celular;
                     usuario.Perfil = usuarioDTO.Perfil;
+
+                    usuarioLogin.Email = usuarioDTO.Email;
                 }
 
 
                 if (novo)
                 {
+                    _context.Login.Add(usuarioLogin);
                     _context.Usuario.Add(usuario);
                 }
 

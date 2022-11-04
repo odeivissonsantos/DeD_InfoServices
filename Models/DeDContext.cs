@@ -16,6 +16,7 @@ namespace DeD_InfoServices.Models
 
         public DbSet<UsuarioModel> Usuario { get; set; }
         public DbSet<LoginModel> Login { get; set; }
+        public DbSet<ProdutoModel> Produto { get; set; }
 
 
     }

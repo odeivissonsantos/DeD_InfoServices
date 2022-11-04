@@ -91,7 +91,7 @@ namespace DeD_InfoServices.Controllers
                 error = ex.Message;
             }
 
-            return Json(new { is_action, error });
+            return Json(new { is_action, error, usuarioDTO });
         }
 
         [HttpPost]

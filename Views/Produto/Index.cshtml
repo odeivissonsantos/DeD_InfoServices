@@ -1,0 +1,158 @@
+﻿@model DeD_InfoServices.DTOs.ProdutoDTO
+@{
+    ViewData["Title"] = "Lista de Produtos";
+}
+
+<link rel="stylesheet" href="~/css/usuario.css" />
+
+
+<a href="@Url.Action("Index", "Home")" class="btn btn-warning mt-2 ml-2">Voltar</a>
+
+<section class="container mt-2">
+        <div class="col-x-12">
+            <div class="box">
+                <div class="box-header">
+                    <h2 class="box-title">Lista de produtos ativos</h2>
+                </div><!-- /.box-header -->
+                <div class="box-body col-x-12">
+
+                    <div id="list_header">
+                        <div id="msgError" class="alert alert-danger alert-dismissable" style="display: none;">
+                            <i class="fa fa-ban"></i>
+                            <button class="close" aria-hidden="true" data-dismiss="alert" type="button">×</button>
+                            <b>Erro</b>
+                            <span id="erroMsg"></span>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="form-group col-sm-8">
+                            <label>Código Interno:</label>
+                            <input type="text" placeholder="EX: 086599" id="pesquisaCodigo" name="pesquisaCodigo" class="form-control input-value">
+                        </div>
+                        <div class="form-group col-sm-4" style="margin-top: 31px">
+                            <button type="button" id="btnExameListar" onclick="listar();" class="btn btn-primary">Pesquisar</button>
+                            <a href="@Url.Action("Cadastrar", "Produto")" class="btn btn-success" style="margin-left: 5px; color:white;">Cadastrar</a>
+                        </div>
+                    </div>
+
+                    <table id="list_items" class="table table-bordered table-striped">
+                        <thead>
+                            <tr>
+                                <th>Id</th>
+                                <th>Nome</th>
+                                <th>Código Interno</th>
+                                <th>Cor</th>
+                                <th>Valor</th>
+                                <th>Data Cadastro</th>
+                                <th></th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                        <tfoot>
+                            <tr>
+                                <th>Id</th>
+                                <th>Nome</th>
+                                <th>Código Interno</th>
+                                <th>Cor</th>
+                                <th>Valor</th>
+                                <th>Data Cadastro</th>
+                                <th></th>
+                                <th></th>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div><!-- /.box-body -->
+            </div><!-- /.box -->
+        </div>
+</section><!-- /.content -->
+
+<div id="modalExclusao">
+    <div class="modal fade" id="modal-exclusao" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Confirmação de Exclusão</h4>
+
+                </div>
+                <div class="modal-body" style="padding-bottom: 0px; text-align: center; font-size: 18px;">
+                    <div class="row">
+                        Tem certeza que deseja excluir o produto?
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button id="btn-confirmar-excluir" class="btn btn-danger pull-right">Excluir</button>
+                    <button type="button" class="btn btn-secondary pull-left" data-dismiss="modal">Não</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#btn-confirmar-excluir').on('click', excluir);
+
+        listar();
+    });
+
+    function listar() {
+        $('#list_items').dataTable({
+            'bPaginate': true,
+            'bJQueryUI': true,
+            'bProcessing': true,
+            'bServerSide': true,
+            "searching": true,
+            'bDestroy': true,
+            'sAjaxSource': `@Url.Action("ProdutoPagination", "Produto")?codigo_interno=${$('#pesquisaCodigo').val()}`,
+            'sServerMethod': 'POST',
+            'aoColumns': [
+                { 'mData': 'ide_produto' },
+                { 'mData': 'nome' },
+                { 'mData': 'codigo_interno' },
+                { 'mData': 'cor' },
+                { 'mData': 'valor_unitario' },
+                { 'mData': 'dtc_cadastro' },
+                { 'mData': 'editar' },
+                { 'mData': 'excluir' }
+            ],
+            "language": {
+                "url": "//cdn.datatables.net/plug-ins/1.12.1/i18n/pt-BR.json"
+                }
+        });
+    }
+
+    function modalExcluir(codigo_interno) {
+        $('#modal-exclusao').modal('show');
+        $('#btn-confirmar-excluir').attr('id-target', codigo_interno);
+    }
+
+    function excluir() {
+        let codigo_interno = $('#btn-confirmar-excluir').attr('id-target');
+
+        $.ajax({
+            type: 'POST',
+            data: {
+                'codigo_interno': codigo_interno,
+            },
+            url: '@Url.Action("ExcluirProduto", "Produto")',
+            success: function (result) {
+                if (result.is_action) {
+                    swal("Sucesso!", "Produto excluído com sucesso!", "success");
+                    listar();
+                    $('#modal-exclusao').modal('hide');
+                }
+                else {
+                    swal("Ops!", result.error, "error");
+                }
+            },
+            error: function (error)
+            {
+                swal("Ops!", "Ocorreu um erro: " + error, "error");
+            },
+            datatype: 'json'
+        });
+    }
+</script>
+
