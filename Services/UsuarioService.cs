@@ -57,7 +57,8 @@ namespace DeD_InfoServices.Services
                     usuario.Nome = usuarioDTO.Nome;
                     usuario.Sobrenome = usuarioDTO.Sobrenome;
                     usuario.Email = usuarioDTO.Email;
-                    usuario.Perfil = Enums.PerfilEnum.Padrao;
+                    usuario.Celular = usuarioDTO.Celular;
+                    usuario.Perfil = usuarioDTO.Perfil;
                     usuario.Dtc_Cadastro = DateTime.Now;
 
                     novo = true;
@@ -67,6 +68,7 @@ namespace DeD_InfoServices.Services
                     usuario.Nome = usuarioDTO.Nome;
                     usuario.Sobrenome = usuarioDTO.Sobrenome;
                     usuario.Email = usuarioDTO.Email;
+                    usuario.Celular = usuarioDTO.Celular;
                     usuario.Perfil = usuarioDTO.Perfil;
                 }
 

@@ -12,7 +12,7 @@
         <div class="col-x-12">
             <div class="box">
                 <div class="box-header">
-                    <h2 class="box-title">Lista de Usuários</h2>
+                    <h2 class="box-title">Lista de usuários ativos</h2>
                 </div><!-- /.box-header -->
                 <div class="box-body col-x-12">
 
@@ -98,16 +98,6 @@
     $(document).ready(function () {
         $('#btn-confirmar-excluir').on('click', excluir);
 
-        //$('#pesquisaCodigo').on('keypress', maskPesquisaCodigo);
-        //function maskPesquisaCodigo(evt) {
-        //    evt = (evt) ? evt : window.event;
-        //    var charCode = (evt.which) ? evt.which : evt.keyCode;
-        //    if ((charCode > 31 && charCode < 48) || charCode > 57) {
-        //        return false;
-        //    }
-        //    return true;
-        //}
-
         listar();
     });
 
@@ -144,14 +134,6 @@
 
     function excluir() {
         let ide_usuario = $('#btn-confirmar-excluir').attr('id-target');
-
-        //if (!justificativa) {
-        //    swal("Ops!", "Justificativa é obrigatória!", "error");
-        //    return;
-        //} else if (justificativa.length < 5) {
-        //    swal("Ops!", "Justificativa deve ter, no mínimo, 5 caracteres!", "error");
-        //    return;
-        //}
 
         $.ajax({
             type: 'POST',
