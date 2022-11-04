@@ -40,7 +40,7 @@ namespace DeD_InfoServices.Controllers
 
             int recordsTotal = query.Count();
 
-            List<UsuarioDTO> aList = query.OrderByDescending(x => x.Nome).Skip(iDisplayStart).Take(iDisplayLength)
+            List<UsuarioDTO> aList = query.OrderBy(x => x.Nome).Skip(iDisplayStart).Take(iDisplayLength)
                 .Select(x => new UsuarioDTO(x)).ToList();
 
             var data = aList.Select(x => new

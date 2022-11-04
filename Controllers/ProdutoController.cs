@@ -31,12 +31,12 @@ namespace DeD_InfoServices.Controllers
 
             if (!string.IsNullOrEmpty(codigo_interno)) query = query.Where(x => x.Codigo_Interno == codigo_interno);
 
-            if (!string.IsNullOrEmpty(sSearch)) query = query.Where(x => x.Nome.ToLower()
+            if (!string.IsNullOrEmpty(sSearch)) query = query.Where(x => x.Codigo_Interno.ToLower()
                 .Contains(Utilities.RemoveSpecialCharacters(sSearch).ToLower())).AsQueryable();
 
             int recordsTotal = query.Count();
 
-            List<ProdutoDTO> aList = query.OrderByDescending(x => x.Nome).Skip(iDisplayStart).Take(iDisplayLength)
+            List<ProdutoDTO> aList = query.OrderBy(x => x.Nome).Skip(iDisplayStart).Take(iDisplayLength)
                 .Select(x => new ProdutoDTO(x)).ToList();
 
             var data = aList.Select(x => new
