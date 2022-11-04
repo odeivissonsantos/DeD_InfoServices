@@ -1,7 +1,9 @@
+using DeD_InfoServices.Helpers;
 using DeD_InfoServices.Models;
 using DeD_InfoServices.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -31,8 +33,15 @@ namespace DeD_InfoServices
             services.AddDbContext<DeDContext>(options =>
                 options.UseSqlite(Configuration.GetConnectionString
                 ("DeDInfoServicesConnectionString")));
+            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             services.AddScoped<UsuarioService>();
-            services.AddScoped<ProdutoService>();        
+            services.AddScoped<ProdutoService>();
+            services.AddScoped<SessionHelper>();
+            services.AddSession(o =>
+            {
+                o.Cookie.HttpOnly = true;
+                o.Cookie.IsEssential = true;
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
