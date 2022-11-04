@@ -51,7 +51,7 @@ namespace DeD_InfoServices.Controllers
                 celular = x.Celular,
                 dtc_cadastro = x.Dtc_Cadastro.ToString("dd/MM/yyyy"),
                 perfil = x.Perfil == Enums.PerfilEnum.Admin ? "Administrador" : "Padrão",
-                editar = $"<a href='{Url.Action("Index", "Home")}?ide_usuario={x.Ide_Usuario}'>Editar</a>",
+                editar = $"<a href='{Url.Action("Cadastrar", "Usuario")}?ide_usuario={x.Ide_Usuario}'>Editar</a>",
                 excluir = $"<a href='#' onclick='modalExcluir({x.Ide_Usuario})'>Excluir</a>",
             }).ToArray();
 
@@ -64,6 +64,54 @@ namespace DeD_InfoServices.Controllers
                 aaData = data
             });
 
+        }
+
+        public IActionResult Cadastrar(int? ide_usuario)
+        {
+
+            UsuarioDTO usuarioDTO = _usuarioService.BuscarPorId(ide_usuario);
+            if (usuarioDTO == null) usuarioDTO = new UsuarioDTO();
+
+            return View(usuarioDTO);
+        }
+
+        [HttpPost]
+        public ActionResult CadastrarUsuario(UsuarioDTO usuarioDTO)
+        {
+            string error = string.Empty;
+            bool is_action = false;
+
+            try
+            {
+                _usuarioService.SalvarUsuario(usuarioDTO);
+                is_action = true;
+            }
+            catch (Exception ex)
+            {
+                error = ex.Message;
+            }
+
+            return Json(new { is_action, error });
+        }
+
+        [HttpPost]
+        public ActionResult ExcluirUsuario(int ide_usuario)
+        {
+
+            string error = string.Empty;
+            bool is_action = false;
+
+            try
+            {
+                _usuarioService.ExcluirUsuario(ide_usuario);
+                is_action = true;
+            }
+            catch (Exception ex)
+            {
+                error = ex.Message;
+            }
+
+            return Json(new { is_action, error });
         }
     }
 }

@@ -62,11 +62,14 @@ namespace DeD_InfoServices.Services
 
                     novo = true;
                 }
+                else
+                {
+                    usuario.Nome = usuarioDTO.Nome;
+                    usuario.Sobrenome = usuarioDTO.Sobrenome;
+                    usuario.Email = usuarioDTO.Email;
+                    usuario.Perfil = usuarioDTO.Perfil;
+                }
 
-                usuario.Nome = usuarioDTO.Nome;
-                usuario.Sobrenome = usuarioDTO.Sobrenome;
-                usuario.Email = usuarioDTO.Email;
-                usuario.Perfil = usuarioDTO.Perfil;
 
                 if (novo)
                 {
@@ -82,7 +85,7 @@ namespace DeD_InfoServices.Services
             }
         }
 
-        public void ExcluirUsuario(long ide_usuario)
+        public void ExcluirUsuario(int ide_usuario)
         {
             string error = "";
 

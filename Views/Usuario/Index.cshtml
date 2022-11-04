@@ -3,6 +3,11 @@
     ViewData["Title"] = "Lista de Usuários";
 }
 
+<link rel="stylesheet" href="~/css/usuario.css" />
+
+
+<a href="@Url.Action("Index", "Home")" class="btn btn-warning mt-2 ml-2">Voltar</a>
+
 <section class="container mt-2">
         <div class="col-x-12">
             <div class="box">
@@ -31,7 +36,7 @@
                         </div>
                         <div class="form-group col-sm-4" style="margin-top: 31px">
                             <button type="button" id="btnExameListar" onclick="listar();" class="btn btn-primary">Pesquisar</button>
-                            <a href="@Url.Action("Index", "Home")" class="btn btn-success" style="margin-left: 5px; color:white;">Novo</a>
+                            <a href="@Url.Action("Cadastrar", "Usuario")" class="btn btn-success" style="margin-left: 5px; color:white;">Cadastrar</a>
                         </div>
                     </div>
 
@@ -72,7 +77,7 @@
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h4 class="modal-title">Confirmação</h4>
+                    <h4 class="modal-title">Confirmação de Exclusão</h4>
 
                 </div>
                 <div class="modal-body" style="padding-bottom: 0px; text-align: center; font-size: 18px;">
@@ -138,26 +143,25 @@
     }
 
     function excluir() {
-        let ide_exame = $('#btn-confirmar-excluir').attr('id-target');
+        let ide_usuario = $('#btn-confirmar-excluir').attr('id-target');
 
-        if (!justificativa) {
-            swal("Ops!", "Justificativa é obrigatória!", "error");
-            return;
-        } else if (justificativa.length < 5) {
-            swal("Ops!", "Justificativa deve ter, no mínimo, 5 caracteres!", "error");
-            return;
-        }
+        //if (!justificativa) {
+        //    swal("Ops!", "Justificativa é obrigatória!", "error");
+        //    return;
+        //} else if (justificativa.length < 5) {
+        //    swal("Ops!", "Justificativa deve ter, no mínimo, 5 caracteres!", "error");
+        //    return;
+        //}
 
         $.ajax({
             type: 'POST',
             data: {
-                'ide_exame': ide_exame,
-                'justificativa': justificativa
+                'ide_usuario': ide_usuario,
             },
             url: '@Url.Action("ExcluirUsuario", "Usuario")',
             success: function (result) {
                 if (result.is_action) {
-                    swal("Sucesso!", "Exame excluído com sucesso!", "success");
+                    swal("Sucesso!", "Usuário excluído com sucesso!", "success");
                     listar();
                     $('#modal-exclusao').modal('hide');
                 }
