@@ -27,10 +27,10 @@ namespace DeD_InfoServices.Controllers
             string error = "";
             bool is_action = false;
 
-            var query = _deDContext.Login.Where(x => x.Email == loginModel.Email).FirstOrDefault();
-
             try
             {
+                var query = _deDContext.Login.Where(x => x.Email == loginModel.Email).FirstOrDefault();
+
                 if (query == null) throw new Exception("Usuário não encontrado");
 
                 if (query.Email == loginModel.Email && query.Senha == loginModel.Senha)

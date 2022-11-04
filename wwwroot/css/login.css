@@ -1,0 +1,14 @@
+﻿.background-image {
+    background-image: url('/images/logo.jpeg');
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+.form-login {
+    padding-top: 100px;
+    padding-left: 30px;
+}
+
+.titulo-login {
+    text-align: center;
+}

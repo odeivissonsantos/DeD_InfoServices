@@ -54,13 +54,18 @@ button.accept-policy {
 /* Sticky footer styles
 -------------------------------------------------- */
 html {
-  position: relative;
-  min-height: 100%;
+    min-height: 100%;
+    position: relative;
+    min-width: 100%;
+}
+
+html, body, main {
+    height: 100%;
+    width: 100%;
 }
 
 body {
-  /* Margin bottom by footer height */
-  margin-bottom: 60px;
+    margin: 0px;
 }
 .footer {
   position: absolute;
@@ -68,4 +73,9 @@ body {
   width: 100%;
   white-space: nowrap;
   line-height: 60px; /* Vertically center the text there */
+}
+
+.container-fluid {
+    padding-left: 0px;
+    padding-right: 0px;
 }

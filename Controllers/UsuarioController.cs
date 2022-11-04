@@ -49,7 +49,7 @@ namespace DeD_InfoServices.Controllers
                 nome = $"{x.Nome} {x.Sobrenome}",
                 email = x.Email,
                 celular = x.Celular,
-                dtc_cadastro = x.Dtc_Cadastro,
+                dtc_cadastro = x.Dtc_Cadastro.ToString("dd/MM/yyyy"),
                 perfil = x.Perfil == Enums.PerfilEnum.Admin ? "Administrador" : "Padrão",
                 editar = $"<a href='{Url.Action("Index", "Home")}?ide_usuario={x.Ide_Usuario}'>Editar</a>",
                 excluir = $"<a href='#' onclick='modalExcluir({x.Ide_Usuario})'>Excluir</a>",

@@ -3,7 +3,7 @@
     ViewData["Title"] = "Lista de Usuários";
 }
 
-<section class="container">
+<section class="container mt-2">
         <div class="col-x-12">
             <div class="box">
                 <div class="box-header">
@@ -20,16 +20,16 @@
                         </div>
                     </div>
 
-                    <div>
-                        <div class="form-group col-xs-2">
+                    <div class="row">
+                        <div class="form-group col-sm-4">
                             <label>Email:</label>
                             <input type="text" placeholder="EX: email@email.com" id="pesquisaEmail" name="pesquisaEmail" class="form-control input-value">
                         </div>
-                        <div class="form-group col-xs-2">
+                        <div class="form-group col-sm-4">
                             <label>Nome:</label>
                             <input type="text" placeholder="EX: Maria" id="pesquisaNome" name="pesquisaNome" class="form-control input-value">
                         </div>
-                        <div class="form-group col-xs-2" style="margin-top: 25px;">
+                        <div class="form-group col-sm-4" style="margin-top: 31px">
                             <button type="button" id="btnExameListar" onclick="listar();" class="btn btn-primary">Pesquisar</button>
                             <a href="@Url.Action("Index", "Home")" class="btn btn-success" style="margin-left: 5px; color:white;">Novo</a>
                         </div>
@@ -77,13 +77,7 @@
                 </div>
                 <div class="modal-body" style="padding-bottom: 0px; text-align: center; font-size: 18px;">
                     <div class="row">
-                        Tem certeza que deseja excluir o exame?
-                    </div>
-                    <div class="row">
-                        <div class="col-xs-12">
-                            <textarea style="min-height: 150px; margin-top: 15px;" maxlength="500" placeholder="Digite uma justificativa"
-                                      id="txtJustificativa" name="justificativa" class="form-control"></textarea>
-                        </div>
+                        Tem certeza que deseja excluir o usuário?
                     </div>
                 </div>
                 <div class="modal-footer">
@@ -97,7 +91,7 @@
 
 <script type="text/javascript">
     $(document).ready(function () {
-        //$('#btn-confirmar-excluir').on('click', excluir);
+        $('#btn-confirmar-excluir').on('click', excluir);
 
         //$('#pesquisaCodigo').on('keypress', maskPesquisaCodigo);
         //function maskPesquisaCodigo(evt) {
@@ -138,15 +132,13 @@
         });
     }
 
-    @*function modalExcluir(ide_exame, justificativa) {
-        $('#txtJustificativa').val('');
+    function modalExcluir(ide_usuario) {
         $('#modal-exclusao').modal('show');
-        $('#btn-confirmar-excluir').attr('id-target', ide_exame);
+        $('#btn-confirmar-excluir').attr('id-target', ide_usuario);
     }
 
     function excluir() {
         let ide_exame = $('#btn-confirmar-excluir').attr('id-target');
-        let justificativa = $('#txtJustificativa').val();
 
         if (!justificativa) {
             swal("Ops!", "Justificativa é obrigatória!", "error");
@@ -162,7 +154,7 @@
                 'ide_exame': ide_exame,
                 'justificativa': justificativa
             },
-            url: '@Url.Action("ExcluirExame", "SGPE")',
+            url: '@Url.Action("ExcluirUsuario", "Usuario")',
             success: function (result) {
                 if (result.is_action) {
                     swal("Sucesso!", "Exame excluído com sucesso!", "success");
@@ -179,6 +171,6 @@
             },
             datatype: 'json'
         });
-    }*@
+    }
 </script>
 
