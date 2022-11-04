@@ -28,7 +28,7 @@
                     <div class="row">
                         <div class="form-group col-sm-8">
                             <label>Código Interno:</label>
-                            <input type="text" placeholder="EX: 086599" id="pesquisaCodigo" name="pesquisaCodigo" class="form-control input-value">
+                            <input type="text" placeholder="EX: 086f99" id="pesquisaCodigo" name="pesquisaCodigo" class="form-control input-value">
                         </div>
                         <div class="form-group col-sm-4" style="margin-top: 31px">
                             <button type="button" id="btnExameListar" onclick="listar();" class="btn btn-primary">Pesquisar</button>
@@ -123,18 +123,18 @@
         });
     }
 
-    function modalExcluir(codigo_interno) {
+    function modalExcluir(ide_produto) {
         $('#modal-exclusao').modal('show');
-        $('#btn-confirmar-excluir').attr('id-target', codigo_interno);
+        $('#btn-confirmar-excluir').attr('id-target', ide_produto);
     }
 
     function excluir() {
-        let codigo_interno = $('#btn-confirmar-excluir').attr('id-target');
+        let ide_produto = $('#btn-confirmar-excluir').attr('id-target');
 
         $.ajax({
             type: 'POST',
             data: {
-                'codigo_interno': codigo_interno,
+                'ide_produto': ide_produto,
             },
             url: '@Url.Action("ExcluirProduto", "Produto")',
             success: function (result) {

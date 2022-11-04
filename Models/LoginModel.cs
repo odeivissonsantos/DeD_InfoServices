@@ -14,6 +14,9 @@ namespace DeD_InfoServices.Models
         [Column("ide_login")]
         public int Ide_Login { get; set; }
 
+        [Column("ide_usuario")]
+        public int Ide_Usuario { get; set; }
+
         [Column("email")]
         public string Email { get; set; }
 

@@ -48,7 +48,7 @@ namespace DeD_InfoServices.Controllers
                 valor_unitario = x.Valor_Unitario,
                 dtc_cadastro = x.Dtc_Cadastro.ToString("dd/MM/yyyy"),
                 editar = $"<a href='{Url.Action("Cadastrar", "Produto")}?codigo_interno={x.Codigo_Interno}'>Editar</a>",
-                excluir = $"<a href='#' onclick='modalExcluir({x.Codigo_Interno})'>Excluir</a>",
+                excluir = $"<a href='#' onclick='modalExcluir({x.Ide_Produto})'>Excluir</a>",
             }).ToArray();
 
             return Json(new
@@ -91,7 +91,7 @@ namespace DeD_InfoServices.Controllers
         }
 
         [HttpPost]
-        public ActionResult ExcluirProduto(string codigo_interno)
+        public ActionResult ExcluirProduto(int ide_produto)
         {
 
             string error = string.Empty;
@@ -99,7 +99,7 @@ namespace DeD_InfoServices.Controllers
 
             try
             {
-                _produtoService.ExcluirProduto(codigo_interno);
+                _produtoService.ExcluirProduto(ide_produto);
                 is_action = true;
             }
             catch (Exception ex)

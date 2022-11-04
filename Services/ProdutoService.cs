@@ -86,13 +86,13 @@ namespace DeD_InfoServices.Services
             }
         }
 
-        public void ExcluirProduto(string codigo_interno)
+        public void ExcluirProduto(int ide_produto)
         {
             string error = "";
 
             try
             {
-                ProdutoModel produto = _context.Produto.Where(x => x.Codigo_Interno == codigo_interno).FirstOrDefault();
+                ProdutoModel produto = _context.Produto.Where(x => x.Ide_Produto == ide_produto && x.Sts_Excluido == false).FirstOrDefault();
                 if (produto == null) throw new Exception("Produto não encontrado");
 
                 produto.Sts_Excluido = true;

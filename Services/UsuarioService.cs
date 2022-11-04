@@ -75,14 +75,18 @@ namespace DeD_InfoServices.Services
                     usuario.Celular = usuarioDTO.Celular;
                     usuario.Perfil = usuarioDTO.Perfil;
 
-                    usuarioLogin.Email = usuarioDTO.Email;
+                    var query = _context.Login.Where(x => x.Ide_Usuario == usuarioDTO.Ide_Usuario).FirstOrDefault();
+                    query.Email = usuarioDTO.Email;
                 }
 
 
                 if (novo)
                 {
-                    _context.Login.Add(usuarioLogin);
                     _context.Usuario.Add(usuario);
+                    _context.SaveChanges();
+
+                    usuarioLogin.Ide_Usuario = usuario.Ide_Usuario;
+                    _context.Login.Add(usuarioLogin);
                 }
 
                 _context.SaveChanges();
