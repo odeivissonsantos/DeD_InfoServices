@@ -63,6 +63,7 @@ namespace DeD_InfoServices
             app.UseRouting();
 
             app.UseAuthorization();
+            app.UseSession();
 
             app.UseEndpoints(endpoints =>
             {

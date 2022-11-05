@@ -1,4 +1,5 @@
 ﻿using DeD_InfoServices.DTOs;
+using DeD_InfoServices.Filters;
 using DeD_InfoServices.Models;
 using DeD_InfoServices.Services;
 using DeD_InfoServices.Utils;
@@ -10,6 +11,7 @@ using System.Threading.Tasks;
 
 namespace DeD_InfoServices.Controllers
 {
+    [UsuarioAdmin]
     public class UsuarioController : Controller
     {
         private readonly UsuarioService _usuarioService;

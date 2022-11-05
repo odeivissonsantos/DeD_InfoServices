@@ -1,4 +1,7 @@
-﻿using DeD_InfoServices.Models;
+﻿using DeD_InfoServices.DTOs;
+using DeD_InfoServices.Filters;
+using DeD_InfoServices.Helpers;
+using DeD_InfoServices.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
@@ -9,29 +12,31 @@ using System.Threading.Tasks;
 
 namespace DeD_InfoServices.Controllers
 {
+    [UsuarioPadrao]
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
+        private readonly DeDContext _deDContext;
+        private readonly SessionHelper _sessionHelper;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(DeDContext deDContext, SessionHelper sessionHelper)
         {
-            _logger = logger;
+            _deDContext = deDContext;
+            _sessionHelper = sessionHelper;
         }
 
         public IActionResult Index()
         {
-            return View();
-        }
+            var usuario = _sessionHelper.BuscarSessaoDoUsuario();
 
-        public IActionResult Privacy()
-        {
-            return View();
-        }
-
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
-        {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+            if (usuario != null)
+            {
+                return View();
+            }
+            else
+            {
+                throw new Exception("Usuário ainda não está logado, efetue o login.");
+                _ = RedirectToAction("Index", "Login");
+            }
         }
     }
 }
