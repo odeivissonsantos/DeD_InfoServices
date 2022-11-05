@@ -16,18 +16,21 @@
                 </a>
             </div>
         </div>
-        <div class="text-center col-sm-3">
-            <div class="card text-white bg-info mb-3 mt-4" style="max-width: 18rem; color: currentColor; ">
-                <a href='@Url.Action("Index", "Usuario")'>
-                    <div class="card-body" style="color:white;">
-                        <h5 class="card-title">Usuarios</h5>
-                        <p class="card-text">Usuarios</p>
-                    </div>
-                </a>
+        @if (@Model.Perfil == DeD_InfoServices.Enums.PerfilEnum.Admin)
+        {
+            <div class="text-center col-sm-3">
+                <div class="card text-white bg-info mb-3 mt-4" style="max-width: 18rem; color: currentColor; ">
+                    <a href='@Url.Action("Index", "Usuario")'>
+                        <div class="card-body" style="color:white;">
+                            <h5 class="card-title">Usuarios</h5>
+                            <p class="card-text">Usuarios</p>
+                        </div>
+                    </a>
+                </div>
             </div>
-        </div>
+        }
 
-    </div>
+        </div>
     
 </section>
    

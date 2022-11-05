@@ -30,7 +30,7 @@ namespace DeD_InfoServices.Controllers
 
             if (usuario != null)
             {
-                return View();
+                return View(usuario);
             }
             else
             {
