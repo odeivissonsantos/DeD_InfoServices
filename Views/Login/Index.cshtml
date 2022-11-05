@@ -77,12 +77,11 @@
                     $('#errorModal').hide();
                     $('#msgSucess #sucessMsg').html('Login efetuado com sucesso!!!');
                     $('#sucessModal').show();
-                    $('#email').val('');
-                    $('#senha').val('');
                     window.location.href = '@Url.Action("Index", "Home")';
                 }
                 else
                 {
+                    alert(result.error);
                     $('#msgError #erroMsg').html(result.error);
                     $('#errorModal').show();
                     $('#sucessModal').hide();

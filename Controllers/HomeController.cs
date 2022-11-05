@@ -26,17 +26,24 @@ namespace DeD_InfoServices.Controllers
 
         public IActionResult Index()
         {
+            bool is_action = true;
+            string error = "";
             var usuario = _sessionHelper.BuscarSessaoDoUsuario();
 
-            if (usuario != null)
+            try
             {
+                if(usuario == null) throw new Exception("Usuário ainda não está logado, efetue o login.");
                 return View(usuario);
             }
-            else
+            catch(Exception ex)
             {
-                throw new Exception("Usuário ainda não está logado, efetue o login.");
+                error = ex.Message;
+                is_action = false;
                 _ = RedirectToAction("Index", "Login");
             }
+
+            return Json(new {error, is_action, usuario });
+
         }
     }
 }

@@ -29,7 +29,7 @@ namespace DeD_InfoServices.Controllers
         public IActionResult Logar(LoginModel loginModel)
         {
             string error = "";
-            bool is_action = false;
+            bool is_action = true;
 
             UsuarioDTO usuariologado = new UsuarioDTO();
 
@@ -56,7 +56,6 @@ namespace DeD_InfoServices.Controllers
                     usuariologado.Sts_Excluido = dadosUsuario.Sts_Excluido;
 
                     _sessionHelper.CriarSessaoDoUsuario(usuariologado);
-                    is_action = true;
                 }
                 else
                 {
@@ -66,6 +65,7 @@ namespace DeD_InfoServices.Controllers
             catch (Exception ex)
             {
                 error = ex.Message;
+                is_action = false;
             }
 
             return Json(new{ is_action, error, usuariologado });
