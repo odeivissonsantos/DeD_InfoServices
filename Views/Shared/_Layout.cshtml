@@ -64,45 +64,29 @@
             <div class="modal-dialog modal-dialog-centered" role="document">
 
 
-                <div class="modal-content">
+                <div class="modal-content row">
                     <div class="modal-header">
                         <h4 class="modal-title">Alterar Senha</h4>
                     </div>
-                    <div class="modal-body" style="padding-bottom: 0px; text-align: center; font-size: 18px;">
+                    <div class="modal-body" style="padding-bottom: 0px; font-size: 18px;">
 
-                        <div class="row">
-                            Senha atual:
+                        <div class="col-sm-12">
+                            <span>Senha atual: </span>
+                            <input type="password" id="AlterarSenha" name="SenhaAtual" placeholder="Digite a senha atual" class="form-control">
                         </div>
 
-                        <div class="wrap-input100 validate-input" data-validate="Senha">
-                            <input type="password" id="AlterarSenha" name="SenhaAtual" placeholder="Digite senha atual" class="form-control">
-                            <span class="focus-input100"></span>
+                        <div class="col-sm-12 mt-2">
+                            <span>Nova Senha: </span>
+                            <input type="password" id="NovaSenha" name="NovaSenha" placeholder="Digite a nova senha" class="form-control">
                         </div>
-
-
-                        <div class="row">
-                            Nova Senha:
-                        </div>
-
-                        <div class="row">
-                            <div class="col-xs-12">
-                                <textarea style="min-height: 50px; margin-top: 15px;" maxlength="50" placeholder="Digite uma nova senha"
-                                          id="NovaSenha" name="NovaSenha" class="form-control"></textarea>
-                            </div>
-                        </div>
-
-
-                        <div class="row">
-                            Confirmação da nova senha:
-                        </div>
-                        <div class="row">
-                            <div class="col-xs-12">
-                                <textarea style="min-height: 50px; margin-top: 15px;" maxlength="50" placeholder="Confirmação da nova senha"
-                                          id="ConfirmarNovaSenha" name="ConfirmarSenha" class="form-control"></textarea>
-                            </div>
+                        
+                        <div class="col-sm-12 mt-2">
+                            <span>Confirmação da nova senha: </span>
+                            <input type="password" id="ConfirmarNovaSenha" name="ConfirmarSenha" placeholder="Confirme sua nova senha" class="form-control">
                         </div>
 
                     </div>
+                    <br />
                     <div class="modal-footer">
                         <button id="btn-confirmar-excluir" class="btn btn-primary pull-right" onclick="SalvarUsuario()">Salvar</button>
                         <button type="button" class="btn btn-danger pull-left" data-dismiss="modal" onclick="fechar_alerta();">Cancelar</button>
@@ -119,37 +103,31 @@
                     <div class="modal-header">
                         <h4 class="modal-title" style=" text-align: center;">Perfil</h4>
                     </div>
-                    <div class="modal-body" style="padding-bottom: 0px; text-align: center; font-size: 18px;">
-                        <div class="row">
-                            Nome:
+                    <div class="modal-body" style="padding-bottom: 0px; font-size: 18px;">
+                        <div class="col-sm-12">
+                            <span>Nome:</span>
+                            <input type="text" placeholder="" class="form-control" disabled>
                         </div>
-                        <div class="card">
-
+                        <div class="col-sm-12">
+                            <span>Sobrenome:</span>
+                            <input type="text" placeholder="" class="form-control" disabled>
                         </div>
-                        <div class="row">
-                            Sobrenome:
+                        <div class="col-sm-12">
+                            <span>Email:</span>
+                            <input type="text" placeholder="" class="form-control" disabled>
                         </div>
-                        <div class="card">
-
+                        <div class="col-sm-12">
+                            <span>Perfil:</span>
+                            <input type="text" placeholder="" class="form-control" disabled>
                         </div>
-                        <div class="row">
-                            Email:
+                        <div class="col-sm-12">
+                            <span>Celular:</span>
+                            <input type="text" placeholder="" class="form-control" disabled>
                         </div>
-                        <div class="card">
-
-                        </div>
-                        <div class="row">
-                            Perfil:
-                        </div>
-                        <div class="card">
-
-                        </div>
-                        <div class="row">
-                            Celular:
-                        </div>
-                        <div class="card">
-
-                        </div>
+                    </div>
+                    <br />
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-danger pull-left" data-dismiss="modal" onclick="fechar_alerta();">Fechar</button>
                     </div>
                 </div>
             </div>
