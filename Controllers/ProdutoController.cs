@@ -1,5 +1,6 @@
 ﻿using DeD_InfoServices.DTOs;
 using DeD_InfoServices.Filters;
+using DeD_InfoServices.Helpers;
 using DeD_InfoServices.Models;
 using DeD_InfoServices.Services;
 using DeD_InfoServices.Utils;
@@ -15,13 +16,18 @@ namespace DeD_InfoServices.Controllers
     public class ProdutoController : Controller
     {
         private readonly ProdutoService _produtoService;
+        private readonly SessionHelper _sessionHelper;
 
-        public ProdutoController(ProdutoService produtoService)
+        public ProdutoController(ProdutoService produtoService, SessionHelper sessionHelper)
         {
             _produtoService = produtoService;
+            _sessionHelper = sessionHelper;
         }
+
         public IActionResult Index()
         {
+            var usuario = _sessionHelper.BuscarSessaoDoUsuario();
+            ViewBag.NomeUsuario = usuario.Nome;
             return View();
         }
 
@@ -66,6 +72,8 @@ namespace DeD_InfoServices.Controllers
 
         public IActionResult Cadastrar(string codigo_interno)
         {
+            var usuario = _sessionHelper.BuscarSessaoDoUsuario();
+            ViewBag.NomeUsuario = usuario.Nome;
 
             ProdutoDTO produtoDTO = _produtoService.BuscarPorCodigoInterno(codigo_interno);
             if (produtoDTO == null) produtoDTO = new ProdutoDTO();

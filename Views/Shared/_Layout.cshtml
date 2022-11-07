@@ -13,17 +13,25 @@
 </head>
 <body>
     <header>
-        <nav class="navbar static-top navbar-light bg-primary">
-            <a class="navbar-brand" href="@Url.Action("Index", "Home")">
-                <span style="color:white">
-                    D&D InfoServices
-                </span>
-            </a>
-            <a class="navbar-brand" href="@Url.Action("Sair", "Login")">
-                <span style="color:white">
-                    Sair
-                </span>
-            </a>
+        <nav class="navbar static-top navbar-light bg-primary row">
+            <div class="col-sm-10">
+                <a class="navbar-brand" href="@Url.Action("Index", "Home")">
+                    <span style="color:white">
+                        D&D InfoServices
+                    </span>
+                </a>
+            </div>
+            <div class="col-sm-2 dados-usuario">
+
+                <button type="button" class="dropdown-toggle btn btn-primary botao-usuario" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"> <span style="color:white"><b>@ViewBag.NomeUsuario </b></span></button>
+                <ul class="dropdown-menu">
+                    <li><a href="@Url.Action("Index", "Home")"> <span>Perfil</span></a></li>
+                    <li><a href="@Url.Action("Index", "Home")"> <span>Alterar Senha</span></a></li>
+                    <li role="separator" class="divider"> <hr /> </li>
+                    <li><a href="@Url.Action("Sair", "Login")"><span>Sair</span></a></li>
+
+                </ul>
+            </div>
         </nav>
     </header>
     <div class="container-fluid">

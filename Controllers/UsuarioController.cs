@@ -1,5 +1,6 @@
 ﻿using DeD_InfoServices.DTOs;
 using DeD_InfoServices.Filters;
+using DeD_InfoServices.Helpers;
 using DeD_InfoServices.Models;
 using DeD_InfoServices.Services;
 using DeD_InfoServices.Utils;
@@ -15,14 +16,19 @@ namespace DeD_InfoServices.Controllers
     public class UsuarioController : Controller
     {
         private readonly UsuarioService _usuarioService;
+        private readonly SessionHelper _sessionHelper;
 
-        public UsuarioController(UsuarioService usuarioService)
+        public UsuarioController(UsuarioService usuarioService, SessionHelper sessionHelper)
         {
             _usuarioService = usuarioService;
+            _sessionHelper = sessionHelper;
         }
 
         public IActionResult Index()
         {
+            var usuario = _sessionHelper.BuscarSessaoDoUsuario();
+            ViewBag.NomeUsuario = usuario.Nome;
+
             return View();
         }
 
@@ -70,6 +76,8 @@ namespace DeD_InfoServices.Controllers
 
         public IActionResult Cadastrar(int? ide_usuario)
         {
+            var usuario = _sessionHelper.BuscarSessaoDoUsuario();
+            ViewBag.NomeUsuario = usuario.Nome;
 
             UsuarioDTO usuarioDTO = _usuarioService.BuscarPorId(ide_usuario);
             if (usuarioDTO == null) usuarioDTO = new UsuarioDTO();

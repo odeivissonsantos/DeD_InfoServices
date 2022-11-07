@@ -28,11 +28,13 @@ namespace DeD_InfoServices.Controllers
         {
             bool is_action = true;
             string error = "";
+
             var usuario = _sessionHelper.BuscarSessaoDoUsuario();
 
             try
             {
                 if(usuario == null) throw new Exception("Usuário ainda não está logado, efetue o login.");
+                ViewBag.NomeUsuario = usuario.Nome;
                 return View(usuario);
             }
             catch(Exception ex)
@@ -42,7 +44,7 @@ namespace DeD_InfoServices.Controllers
                 _ = RedirectToAction("Index", "Login");
             }
 
-            return Json(new {error, is_action, usuario });
+            return Json(new {error, is_action });
 
         }
     }
