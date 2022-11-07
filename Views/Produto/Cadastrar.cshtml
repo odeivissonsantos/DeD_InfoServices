@@ -83,15 +83,15 @@
 
      function salvar() {
         $.ajax({
-                type: 'POST',
-                data: {
-                    'ide_produto': @Model.Ide_Produto,
-                    'codigo_interno': $('#txtCodigoInterno').val(),
-                    'nome': $('#txtNome').val(),
-                    'cor': $('#txtCor').val(),
-                    'valor_unitario': $('#txtValorUnitario').val()
-                },
-                url: '@Url.Action("CadastrarProduto", "Produto")',
+            type: 'POST',
+            data: {
+                'ide_produto': @Model.Ide_Produto,
+                'codigo_interno': $('#txtCodigoInterno').val(),
+                'nome': $('#txtNome').val(),
+                'cor': $('#txtCor').val(),
+                'valor_unitario': $('#txtValorUnitario').val()
+            },
+            url: '@Url.Action("CadastrarProduto", "Produto")',
             success: function (result) {
                 if (result.is_action) {
                     let novo = '@novo' == "True";

@@ -49,7 +49,7 @@ namespace DeD_InfoServices.Services
                 if (produto == null)
                 {
                     if (_context.Produto.Where(x => x.Codigo_Interno == produtoDTO.Codigo_Interno && !x.Sts_Excluido).Any())
-                        throw new Exception("Já existe um usuário com o mesmo email cadastrado!");
+                        throw new Exception("Já existe um produto com o esse codigo interno");
 
                     produto = new ProdutoModel();
 
@@ -93,7 +93,7 @@ namespace DeD_InfoServices.Services
             try
             {
                 ProdutoModel produto = _context.Produto.Where(x => x.Ide_Produto == ide_produto && x.Sts_Excluido == false).FirstOrDefault();
-                if (produto == null) throw new Exception("Produto não encontrado");
+                if (produto == null) throw new Exception("Não foi encontrado o produto com este id");
 
                 produto.Sts_Excluido = true;
 

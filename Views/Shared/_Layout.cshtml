@@ -25,8 +25,8 @@
 
                 <button type="button" class="dropdown-toggle btn btn-primary botao-usuario" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"> <span style="color:white"><b>@ViewBag.NomeUsuario </b></span></button>
                 <ul class="dropdown-menu">
-                    <li><a href="@Url.Action("Index", "Home")"> <span>Perfil</span></a></li>
-                    <li><a href="@Url.Action("Index", "Home")"> <span>Alterar Senha</span></a></li>
+                    <li><a onclick="modalPerfil()" href="#"> <span>Perfil</span></a></li>
+                    <li><a onclick="modalAlterarsenha()" href="#"> <span>Alterar Senha</span></a></li>
                     <li role="separator" class="divider"> <hr /> </li>
                     <li><a href="@Url.Action("Sair", "Login")"><span>Sair</span></a></li>
 
@@ -34,10 +34,126 @@
             </div>
         </nav>
     </header>
+
     <div class="container-fluid">
         <main>
             @RenderBody()
         </main>
+    </div>
+
+    <div id="modalAlterarSenha">
+        <div class="modal fade" id="modal-Alterar-Senha" aria-hidden="true">
+            <div class="col-sm-12">
+                <div id="errorModal" style="display: none">
+                    <div id="msgError" class="alert alert-danger">
+                        <i class="fa fa-ban"></i>
+                        <button class="close" onclick="fechar_alerta();" aria-hidden="true" type="button">×</button>
+
+                        <span id="erroMsg"></span>
+                    </div>
+                </div>
+                <div id="sucessModal" style="display: none">
+                    <div id="msgSucess" class="alert alert-success">
+                        <i class="fa fa-ban"></i>
+                        <button class="close" onclick="fechar_alerta();" aria-hidden="true" type="button">×</button>
+
+                        <span id="sucessMsg"></span>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-dialog modal-dialog-centered" role="document">
+
+
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title">Alterar Senha</h4>
+                    </div>
+                    <div class="modal-body" style="padding-bottom: 0px; text-align: center; font-size: 18px;">
+
+                        <div class="row">
+                            Senha atual:
+                        </div>
+
+                        <div class="wrap-input100 validate-input" data-validate="Senha">
+                            <input type="password" id="AlterarSenha" name="SenhaAtual" placeholder="Digite senha atual" class="form-control">
+                            <span class="focus-input100"></span>
+                        </div>
+
+
+                        <div class="row">
+                            Nova Senha:
+                        </div>
+
+                        <div class="row">
+                            <div class="col-xs-12">
+                                <textarea style="min-height: 50px; margin-top: 15px;" maxlength="50" placeholder="Digite uma nova senha"
+                                          id="NovaSenha" name="NovaSenha" class="form-control"></textarea>
+                            </div>
+                        </div>
+
+
+                        <div class="row">
+                            Confirmação da nova senha:
+                        </div>
+                        <div class="row">
+                            <div class="col-xs-12">
+                                <textarea style="min-height: 50px; margin-top: 15px;" maxlength="50" placeholder="Confirmação da nova senha"
+                                          id="ConfirmarNovaSenha" name="ConfirmarSenha" class="form-control"></textarea>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="modal-footer">
+                        <button id="btn-confirmar-excluir" class="btn btn-primary pull-right" onclick="SalvarUsuario()">Salvar</button>
+                        <button type="button" class="btn btn-danger pull-left" data-dismiss="modal" onclick="fechar_alerta();">Cancelar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="modalPerfil">
+        <div class="modal fade" id="modal-perfil" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title" style=" text-align: center;">Perfil</h4>
+                    </div>
+                    <div class="modal-body" style="padding-bottom: 0px; text-align: center; font-size: 18px;">
+                        <div class="row">
+                            Nome:
+                        </div>
+                        <div class="card">
+
+                        </div>
+                        <div class="row">
+                            Sobrenome:
+                        </div>
+                        <div class="card">
+
+                        </div>
+                        <div class="row">
+                            Email:
+                        </div>
+                        <div class="card">
+
+                        </div>
+                        <div class="row">
+                            Perfil:
+                        </div>
+                        <div class="card">
+
+                        </div>
+                        <div class="row">
+                            Celular:
+                        </div>
+                        <div class="card">
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 
     <footer class="border-top footer text-muted text-center">
@@ -49,5 +165,58 @@
     <script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.12.1/datatables.min.js"></script>
     <script type="text/javascript" src="~/lib/bootstrap/dist/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="~/lib/bootstrap-validator/dist/js/bootstrapValidator.min.js"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    @*https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js*@
 </body>
 </html>
+
+<script type="text/javascript">
+
+    function modalPerfil()
+    {
+        $('#modal-perfil').modal('show');
+    }
+
+    function modalAlterarsenha() {
+        $('#modal-Alterar-Senha').modal('show');
+    }
+
+    function SalvarUsuario()
+    {
+        $('#msgError #erroMsg').html();
+        $('#item_form #msgError').hide();
+        $.ajax({
+            type: 'POST',
+            data: {
+                'SenhaAtual': $('#AlterarSenha').val(),
+                'NovaSenha': $('#NovaSenha').val(),
+                'ConfirmarSenha': $('#ConfirmarNovaSenha').val(),
+            },
+            url: '@Url.Action("AlterarSenha", "Home")',
+            success: function (result)
+            {
+                $('.overlay').hide();
+                $('#msgSucess #sucessMsg').html('Senha modificada  com sucesso!!!');
+                $('#sucessModal').show();
+                $('#senha').val('');
+                $('#confirmarSenha').val('');
+                $('#email').val('');
+                $('#confirmarEmail').val('');
+                $('#telefone').val('');
+                $('#nome').val('');
+                $('#data').val('');
+            },
+            error: function (error)
+            {
+                $('#msgError #erroMsg').html(error.responseJSON.message);
+                $('#errorModal').show();
+            },
+        });
+    }
+
+    function fechar_alerta() {
+        $('#errorModal').hide();
+        $('#sucessModal').hide();
+    }
+
+</script>

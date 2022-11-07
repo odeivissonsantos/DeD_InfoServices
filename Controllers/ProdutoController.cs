@@ -82,7 +82,7 @@ namespace DeD_InfoServices.Controllers
         }
 
         [HttpPost]
-        public ActionResult CadastrarProduto(ProdutoDTO produtoDTO)
+        public IActionResult CadastrarProduto(ProdutoDTO produtoDTO)
         {
             string error = string.Empty;
             bool is_action = false;
@@ -101,7 +101,7 @@ namespace DeD_InfoServices.Controllers
         }
 
         [HttpPost]
-        public ActionResult ExcluirProduto(int ide_produto)
+        public IActionResult ExcluirProduto(int ide_produto)
         {
 
             string error = string.Empty;

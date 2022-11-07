@@ -86,7 +86,7 @@ namespace DeD_InfoServices.Controllers
         }
 
         [HttpPost]
-        public ActionResult CadastrarUsuario(UsuarioDTO usuarioDTO)
+        public IActionResult CadastrarUsuario(UsuarioDTO usuarioDTO)
         {
             string error = string.Empty;
             bool is_action = false;
@@ -105,7 +105,7 @@ namespace DeD_InfoServices.Controllers
         }
 
         [HttpPost]
-        public ActionResult ExcluirUsuario(int ide_usuario)
+        public IActionResult ExcluirUsuario(int ide_usuario)
         {
 
             string error = string.Empty;
