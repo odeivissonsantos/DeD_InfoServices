@@ -11,7 +11,7 @@ namespace DeD_InfoServices.Models
         public DeDContext(DbContextOptions<DeDContext> options)
             : base(options)
         {
-
+            
         }
 
         public DbSet<UsuarioModel> Usuario { get; set; }
