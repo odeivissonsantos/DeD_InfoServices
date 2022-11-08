@@ -27,7 +27,12 @@ namespace DeD_InfoServices.Controllers
         public IActionResult Index()
         {
             var usuario = _sessionHelper.BuscarSessaoDoUsuario();
-            ViewBag.NomeUsuario = usuario.Nome;
+
+            if (usuario != null)
+            {
+                ViewBag.NomeUsuario = usuario.Nome;
+            } 
+
             return View();
         }
 
@@ -73,7 +78,11 @@ namespace DeD_InfoServices.Controllers
         public IActionResult Cadastrar(string codigo_interno)
         {
             var usuario = _sessionHelper.BuscarSessaoDoUsuario();
-            ViewBag.NomeUsuario = usuario.Nome;
+
+            if (usuario != null)
+            {
+                ViewBag.NomeUsuario = usuario.Nome;
+            }
 
             ProdutoDTO produtoDTO = _produtoService.BuscarPorCodigoInterno(codigo_interno);
             if (produtoDTO == null) produtoDTO = new ProdutoDTO();

@@ -27,7 +27,11 @@ namespace DeD_InfoServices.Controllers
         public IActionResult Index()
         {
             var usuario = _sessionHelper.BuscarSessaoDoUsuario();
-            ViewBag.NomeUsuario = usuario.Nome;
+
+            if (usuario != null)
+            {
+                ViewBag.NomeUsuario = usuario.Nome;
+            }
 
             return View();
         }
@@ -77,7 +81,11 @@ namespace DeD_InfoServices.Controllers
         public IActionResult Cadastrar(int? ide_usuario)
         {
             var usuario = _sessionHelper.BuscarSessaoDoUsuario();
-            ViewBag.NomeUsuario = usuario.Nome;
+
+            if (usuario != null)
+            {
+                ViewBag.NomeUsuario = usuario.Nome;
+            }
 
             UsuarioDTO usuarioDTO = _usuarioService.BuscarPorId(ide_usuario);
             if (usuarioDTO == null) usuarioDTO = new UsuarioDTO();
